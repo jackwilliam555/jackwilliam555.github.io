@@ -7,7 +7,7 @@
     <title>教育经历 | 王焱杰</title>
 
     <style>
-        /* ===== 设计令牌（更精细的视觉控制） ===== */
+        /* ===== 设计令牌 ===== */
         :root {
             --page-width: 1160px;
             --sidebar-width: 230px;
@@ -153,7 +153,7 @@
             padding: 34px 0 70px;
         }
 
-        /* ===== 左侧个人资料（头像优化重点） ===== */
+        /* ===== 左侧个人资料 ===== */
         .profile {
             position: sticky;
             top: calc(var(--nav-height) + 24px);
@@ -163,8 +163,8 @@
             width: 160px;
             height: 160px;
             margin-bottom: 18px;
-            padding: 4px;               /* 内边距形成白边 */
-            border: none;               /* 去除原边框，用阴影和内部白边替代 */
+            padding: 4px;
+            border: none;
             border-radius: 50%;
             background: #fff;
             box-shadow: var(--shadow-avatar);
@@ -180,9 +180,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center 28%;  /* 微调裁切位置，让脸部更居中（根据照片可调） */
+            object-position: center 28%;  /* 针对竖版证件照，可微调 */
             border-radius: 50%;
-            background: #f0f4fa;          /* 图片未加载时的底色 */
+            background: #f0f4fa;
         }
 
         .avatar-fallback {
@@ -258,7 +258,7 @@
             color: #fff;
         }
 
-        /* ===== 右侧内容（结构与原保持一致，未作大改） ===== */
+        /* ===== 右侧内容 ===== */
         .content { min-width: 0; }
         .section + .section { margin-top: 28px; }
 
@@ -399,7 +399,7 @@
             color: #586476;
         }
 
-        /* 荣誉奖励 */
+        /* ===== 荣誉奖励（更新为7项） ===== */
         .award-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -439,7 +439,7 @@
             color: var(--light-muted);
         }
 
-        /* ===== 响应式（平板 & 手机） ===== */
+        /* ===== 响应式 ===== */
         @media (max-width: 900px) {
             .main-nav {
                 position: fixed;
@@ -641,7 +641,7 @@
                 </article>
             </section>
 
-            <!-- 荣誉奖励 -->
+            <!-- ===== 荣誉奖励（已更新为 7 项） ===== -->
             <section class="section">
                 <div class="section-heading">
                     <div class="heading-icon">🏆</div>
@@ -649,22 +649,49 @@
                     <div class="heading-line"></div>
                 </div>
                 <div class="award-grid">
+
+                    <!-- 1. 国家级金奖 -->
                     <article class="award-item">
                         <h3><span class="zh">国家级金奖</span><span class="en">National Gold Award</span></h3>
                         <p><span class="zh">中国国际大学生创新大赛</span><span class="en">China International College Students' Innovation Competition</span></p>
                     </article>
+
+                    <!-- 2. 国家级铜奖 -->
                     <article class="award-item">
-                        <h3><span class="zh">一等奖学金</span><span class="en">First-Class Scholarship</span></h3>
-                        <p><span class="zh">武汉体育学院</span><span class="en">Wuhan Sports University</span></p>
+                        <h3><span class="zh">国家级铜奖</span><span class="en">National Bronze Award</span></h3>
+                        <p><span class="zh">中国体育智能制造创新大赛</span><span class="en">China Sports Intelligent Manufacturing Innovation Competition</span></p>
                     </article>
+
+                    <!-- 3. 省级一等奖 -->
+                    <article class="award-item">
+                        <h3><span class="zh">省级一等奖</span><span class="en">Provincial First Prize</span></h3>
+                        <p><span class="zh">湖北省挑战杯</span><span class="en">Hubei "Challenge Cup"</span></p>
+                    </article>
+
+                    <!-- 4. 省级二等奖 -->
+                    <article class="award-item">
+                        <h3><span class="zh">省级二等奖</span><span class="en">Provincial Second Prize</span></h3>
+                        <p><span class="zh">蓝桥杯全国大学生软件和信息技术大赛</span><span class="en">Blue Bridge Cup National College Students Software and IT Competition</span></p>
+                    </article>
+
+                    <!-- 5. 省级铜奖 -->
+                    <article class="award-item">
+                        <h3><span class="zh">省级铜奖</span><span class="en">Provincial Bronze Award</span></h3>
+                        <p><span class="zh">湖北省体育产业创新创业大赛</span><span class="en">Hubei Sports Industry Innovation and Entrepreneurship Competition</span></p>
+                    </article>
+
+                    <!-- 6. 校级 三好学生 -->
                     <article class="award-item">
                         <h3><span class="zh">三好学生</span><span class="en">Outstanding Student</span></h3>
                         <p><span class="zh">校级荣誉称号</span><span class="en">University Honor</span></p>
                     </article>
+
+                    <!-- 7. 校级 优秀共青团员 -->
                     <article class="award-item">
                         <h3><span class="zh">优秀共青团员</span><span class="en">Outstanding Youth League Member</span></h3>
                         <p><span class="zh">校级荣誉称号</span><span class="en">University Honor</span></p>
                     </article>
+
                 </div>
             </section>
 
