@@ -47,7 +47,6 @@
                 0 7px 24px rgba(32, 47, 68, 0.12),
                 0 0 0 1px rgba(255, 255, 255, 0.85) inset;
 
-            --radius: 16px;
             --radius-small: 9px;
             --radius-full: 9999px;
 
@@ -67,6 +66,7 @@
 
         body {
             min-height: 100vh;
+
             color: var(--text);
             background: var(--background);
 
@@ -117,9 +117,7 @@
             margin: 0 auto;
         }
 
-        /* =========================
-           顶部导航栏
-        ========================= */
+        /* 顶部导航栏 */
 
         .topbar {
             position: sticky;
@@ -247,9 +245,7 @@
             font-size: 18px;
         }
 
-        /* =========================
-           页面布局
-        ========================= */
+        /* 页面布局 */
 
         .page-layout {
             display: grid;
@@ -266,9 +262,7 @@
             padding: 40px 0 78px;
         }
 
-        /* =========================
-           左侧个人资料
-        ========================= */
+        /* 左侧个人资料 */
 
         .profile {
             position: sticky;
@@ -307,7 +301,7 @@
             height: 100%;
 
             object-fit: cover;
-            object-position: center center;
+            object-position: center;
 
             background: #f0f4fa;
             border-radius: 50%;
@@ -333,7 +327,6 @@
 
             font-size: 38px;
             font-weight: 800;
-            letter-spacing: -0.04em;
         }
 
         .profile-name {
@@ -357,10 +350,6 @@
             font-size: 14px;
             line-height: 1.6;
         }
-
-        /* =========================
-           左侧信息列表
-        ========================= */
 
         .profile-meta {
             display: grid;
@@ -425,8 +414,7 @@
         .profile-meta a {
             overflow-wrap: anywhere;
 
-            transition:
-                color var(--transition);
+            transition: color var(--transition);
         }
 
         .profile-meta a:hover {
@@ -474,9 +462,7 @@
             transform: translateY(-1px);
         }
 
-        /* =========================
-           右侧内容
-        ========================= */
+        /* 右侧内容 */
 
         .content {
             min-width: 0;
@@ -531,9 +517,7 @@
             background: var(--line);
         }
 
-        /* =========================
-           教育经历
-        ========================= */
+        /* 教育经历 */
 
         .education-card {
             padding: 25px 28px;
@@ -615,9 +599,7 @@
             color: #a1a9b4;
         }
 
-        /* =========================
-           学业数据
-        ========================= */
+        /* 学业数据 */
 
         .stats-grid {
             display: grid;
@@ -660,9 +642,7 @@
             font-size: 14px;
         }
 
-        /* =========================
-           主要课程
-        ========================= */
+        /* 主要课程 */
 
         .course-area {
             margin-top: 22px;
@@ -708,9 +688,7 @@
             border-color: #cedced;
         }
 
-        /* =========================
-           荣誉奖励
-        ========================= */
+        /* 荣誉奖励 */
 
         .award-grid {
             display: grid;
@@ -761,9 +739,48 @@
             line-height: 1.55;
         }
 
-        /* =========================
-           页脚
-        ========================= */
+        /* 邮箱提示 */
+
+        .toast {
+            position: fixed;
+
+            left: 50%;
+            bottom: 30px;
+            z-index: 3000;
+
+            width: max-content;
+            max-width: calc(100% - 30px);
+
+            padding: 12px 18px;
+
+            color: #ffffff;
+            background: rgba(23, 32, 51, 0.96);
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 12px 35px rgba(23, 32, 51, 0.25);
+
+            font-size: 13px;
+            text-align: center;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translate(-50%, 15px);
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+
+            transform: translate(-50%, 0);
+        }
 
         footer {
             padding: 24px 0 36px;
@@ -776,9 +793,7 @@
             text-align: center;
         }
 
-        /* =========================
-           中等尺寸电脑
-        ========================= */
+        /* 中等尺寸电脑 */
 
         @media
         (min-width: 901px)
@@ -832,9 +847,7 @@
             }
         }
 
-        /* =========================
-           平板
-        ========================= */
+        /* 平板 */
 
         @media (max-width: 900px) {
             .main-nav {
@@ -905,9 +918,7 @@
             }
         }
 
-        /* =========================
-           手机
-        ========================= */
+        /* 手机 */
 
         @media (max-width: 650px) {
             .container {
@@ -947,6 +958,7 @@
 
             .profile-role {
                 margin-top: 6px;
+
                 font-size: 12px;
             }
 
@@ -1033,7 +1045,6 @@
 
 <body>
 
-    <!-- 顶部导航栏 -->
     <header class="topbar">
 
         <div class="container topbar-inner">
@@ -1075,6 +1086,7 @@
                         <a
                             class="nav-link active"
                             href="index.html"
+                            aria-current="page"
                         >
                             <span class="zh">教育</span>
                             <span class="en">Education</span>
@@ -1127,10 +1139,8 @@
 
     </header>
 
-    <!-- 页面主体 -->
     <div class="container page-layout">
 
-        <!-- 左侧资料 -->
         <aside class="profile">
 
             <div class="avatar-wrap">
@@ -1139,6 +1149,9 @@
                     class="avatar"
                     src="assets/images/avatar.png"
                     alt="王焱杰个人证件照"
+                    width="500"
+                    height="500"
+                    decoding="async"
                     onerror="
                         this.style.display='none';
                         this.nextElementSibling.style.display='grid';
@@ -1199,11 +1212,11 @@
                 <li>
 
                     <span
-                        class="icon icon-location"
+                        class="icon"
                         aria-hidden="true"
                     >
-                        <svg viewBox="0 0 384 512">
-                            <path d="M384 192c0 87.4-117 243-168.3 307.2-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192 0 86 86 0 192 0s192 86 192 192zm-192 64a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/>
+                        <svg viewBox="0 0 576 512">
+                            <path d="M288 0L0 128l48 21.3V384h32V163.6L288 256l288-128L288 0zm-112 236.4V336c0 44.2 50.1 80 112 80s112-35.8 112-80v-99.6L288 286.2 176 236.4z"/>
                         </svg>
                     </span>
 
@@ -1249,8 +1262,11 @@
                     </span>
 
                     <a
-                        href="mailto:1289423102@qq.com?subject=%E6%9D%A5%E8%87%AA%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E7%9A%84%E8%81%94%E7%B3%BB&amp;body=%E6%82%A8%E5%A5%BD%EF%BC%8C%E6%88%91%E9%80%9A%E8%BF%87%E6%82%A8%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E8%81%94%E7%B3%BB%E6%82%A8%E3%80%82"
-                        title="向王焱杰发送邮件"
+                        class="qq-mail-link"
+                        href="https://mail.qq.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="打开QQ邮箱并复制邮箱地址"
                     >
                         <span class="zh">电子邮箱</span>
                         <span class="en">Email</span>
@@ -1282,9 +1298,32 @@
 
             </ul>
 
+            <div class="profile-actions">
+
+                <a
+                    class="button-outline"
+                    href="files/CV.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <span class="zh">个人简历</span>
+                    <span class="en">CV</span>
+                </a>
+
+                <a
+                    class="button-outline qq-mail-link"
+                    href="https://mail.qq.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <span class="zh">联系我</span>
+                    <span class="en">Contact</span>
+                </a>
+
+            </div>
+
         </aside>
 
-        <!-- 右侧内容 -->
         <main class="content">
 
             <!-- 教育经历 -->
@@ -1470,6 +1509,7 @@
                 <div class="award-grid">
 
                     <article class="award-item">
+
                         <h3>
                             <span class="zh">国家级金奖</span>
                             <span class="en">National Gold Award</span>
@@ -1485,9 +1525,11 @@
                                 Innovation Competition
                             </span>
                         </p>
+
                     </article>
 
                     <article class="award-item">
+
                         <h3>
                             <span class="zh">国家级铜奖</span>
                             <span class="en">National Bronze Award</span>
@@ -1503,9 +1545,11 @@
                                 Innovation Competition
                             </span>
                         </p>
+
                     </article>
 
                     <article class="award-item">
+
                         <h3>
                             <span class="zh">省级一等奖</span>
                             <span class="en">Provincial First Prize</span>
@@ -1520,9 +1564,11 @@
                                 Hubei Challenge Cup
                             </span>
                         </p>
+
                     </article>
 
                     <article class="award-item">
+
                         <h3>
                             <span class="zh">省级二等奖</span>
                             <span class="en">Provincial Second Prize</span>
@@ -1538,9 +1584,11 @@
                                 Software and IT Competition
                             </span>
                         </p>
+
                     </article>
 
                     <article class="award-item">
+
                         <h3>
                             <span class="zh">省级铜奖</span>
                             <span class="en">Provincial Bronze Award</span>
@@ -1556,9 +1604,11 @@
                                 Entrepreneurship Competition
                             </span>
                         </p>
+
                     </article>
 
                     <article class="award-item">
+
                         <h3>
                             <span class="zh">一等奖学金</span>
                             <span class="en">First-Class Scholarship</span>
@@ -1573,9 +1623,11 @@
                                 University Scholarship
                             </span>
                         </p>
+
                     </article>
 
                     <article class="award-item">
+
                         <h3>
                             <span class="zh">三好学生</span>
                             <span class="en">Outstanding Student</span>
@@ -1590,9 +1642,11 @@
                                 University Honor
                             </span>
                         </p>
+
                     </article>
 
                     <article class="award-item">
+
                         <h3>
                             <span class="zh">优秀共青团员</span>
 
@@ -1610,6 +1664,7 @@
                                 University Honor
                             </span>
                         </p>
+
                     </article>
 
                 </div>
@@ -1621,15 +1676,35 @@
     </div>
 
     <footer>
+
         <div class="container">
             © <span id="year"></span>
             王焱杰 · Hosted on GitHub Pages
         </div>
+
     </footer>
+
+    <div
+        class="toast"
+        id="emailToast"
+        role="status"
+        aria-live="polite"
+    >
+        <span class="zh">
+            QQ邮箱已打开，邮箱地址已复制：1289423102@qq.com
+        </span>
+
+        <span class="en">
+            QQ Mail opened. Email copied: 1289423102@qq.com
+        </span>
+    </div>
 
     <script>
         (function () {
             "use strict";
+
+            const EMAIL_ADDRESS =
+                "1289423102@qq.com";
 
             const body =
                 document.body;
@@ -1654,99 +1729,235 @@
                     "year"
                 );
 
-            const savedLanguage =
-                localStorage.getItem(
-                    "homepage-language"
+            const emailToast =
+                document.getElementById(
+                    "emailToast"
                 );
 
-            if (savedLanguage === "en") {
-                body.classList.add("lang-en");
-                document.documentElement.lang = "en";
-                languageToggle.textContent = "中";
-            }
-
-            languageToggle.addEventListener(
-                "click",
-                function () {
-                    const isEnglish =
-                        body.classList.toggle(
-                            "lang-en"
-                        );
-
-                    document.documentElement.lang =
-                        isEnglish
-                            ? "en"
-                            : "zh-CN";
-
-                    languageToggle.textContent =
-                        isEnglish
-                            ? "中"
-                            : "EN";
-
-                    localStorage.setItem(
-                        "homepage-language",
-                        isEnglish
-                            ? "en"
-                            : "zh"
-                    );
-                }
-            );
-
-            menuToggle.addEventListener(
-                "click",
-                function () {
-                    const isOpen =
-                        mainNav.classList.toggle(
-                            "open"
-                        );
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        String(isOpen)
-                    );
-
-                    menuToggle.textContent =
-                        isOpen
-                            ? "×"
-                            : "☰";
-                }
-            );
+            let toastTimer = null;
 
             document
-                .querySelectorAll(".nav-link")
+                .querySelectorAll(".qq-mail-link")
                 .forEach(function (link) {
                     link.addEventListener(
                         "click",
-                        closeMobileMenu
+                        copyEmailAddress
                     );
                 });
 
-            document.addEventListener(
-                "click",
-                function (event) {
-                    const clickedNav =
-                        mainNav.contains(
-                            event.target
-                        );
+            function copyEmailAddress() {
+                if (
+                    navigator.clipboard &&
+                    window.isSecureContext
+                ) {
+                    navigator.clipboard
+                        .writeText(EMAIL_ADDRESS)
+                        .then(showEmailToast)
+                        .catch(fallbackCopyEmail);
 
-                    const clickedMenu =
-                        menuToggle.contains(
-                            event.target
-                        );
-
-                    if (
-                        !clickedNav &&
-                        !clickedMenu &&
-                        mainNav.classList.contains(
-                            "open"
-                        )
-                    ) {
-                        closeMobileMenu();
-                    }
+                    return;
                 }
-            );
+
+                fallbackCopyEmail();
+            }
+
+            function fallbackCopyEmail() {
+                const textarea =
+                    document.createElement(
+                        "textarea"
+                    );
+
+                textarea.value =
+                    EMAIL_ADDRESS;
+
+                textarea.setAttribute(
+                    "readonly",
+                    ""
+                );
+
+                textarea.style.position =
+                    "fixed";
+
+                textarea.style.left =
+                    "-9999px";
+
+                textarea.style.opacity =
+                    "0";
+
+                document.body.appendChild(
+                    textarea
+                );
+
+                textarea.focus();
+                textarea.select();
+
+                textarea.setSelectionRange(
+                    0,
+                    textarea.value.length
+                );
+
+                try {
+                    document.execCommand("copy");
+                    showEmailToast();
+                } catch (error) {
+                    console.warn(
+                        "邮箱地址复制失败：",
+                        error
+                    );
+                }
+
+                document.body.removeChild(
+                    textarea
+                );
+            }
+
+            function showEmailToast() {
+                if (!emailToast) {
+                    return;
+                }
+
+                emailToast.classList.add("show");
+
+                window.clearTimeout(toastTimer);
+
+                toastTimer =
+                    window.setTimeout(
+                        function () {
+                            emailToast.classList.remove(
+                                "show"
+                            );
+                        },
+                        3500
+                    );
+            }
+
+            let savedLanguage = "zh";
+
+            try {
+                savedLanguage =
+                    localStorage.getItem(
+                        "homepage-language"
+                    ) || "zh";
+            } catch (error) {
+                savedLanguage = "zh";
+            }
+
+            if (
+                savedLanguage === "en" &&
+                languageToggle
+            ) {
+                body.classList.add("lang-en");
+
+                document.documentElement.lang =
+                    "en";
+
+                languageToggle.textContent =
+                    "中";
+            }
+
+            if (languageToggle) {
+                languageToggle.addEventListener(
+                    "click",
+                    function () {
+                        const isEnglish =
+                            body.classList.toggle(
+                                "lang-en"
+                            );
+
+                        document.documentElement.lang =
+                            isEnglish
+                                ? "en"
+                                : "zh-CN";
+
+                        languageToggle.textContent =
+                            isEnglish
+                                ? "中"
+                                : "EN";
+
+                        try {
+                            localStorage.setItem(
+                                "homepage-language",
+                                isEnglish
+                                    ? "en"
+                                    : "zh"
+                            );
+                        } catch (error) {
+                            console.warn(
+                                "语言设置保存失败：",
+                                error
+                            );
+                        }
+                    }
+                );
+            }
+
+            if (
+                menuToggle &&
+                mainNav
+            ) {
+                menuToggle.addEventListener(
+                    "click",
+                    function () {
+                        const isOpen =
+                            mainNav.classList.toggle(
+                                "open"
+                            );
+
+                        menuToggle.setAttribute(
+                            "aria-expanded",
+                            String(isOpen)
+                        );
+
+                        menuToggle.textContent =
+                            isOpen
+                                ? "×"
+                                : "☰";
+                    }
+                );
+
+                document
+                    .querySelectorAll(".nav-link")
+                    .forEach(function (link) {
+                        link.addEventListener(
+                            "click",
+                            closeMobileMenu
+                        );
+                    });
+
+                document.addEventListener(
+                    "click",
+                    function (event) {
+                        const clickedNav =
+                            mainNav.contains(
+                                event.target
+                            );
+
+                        const clickedMenu =
+                            menuToggle.contains(
+                                event.target
+                            );
+
+                        if (
+                            !clickedNav &&
+                            !clickedMenu &&
+                            mainNav.classList.contains(
+                                "open"
+                            )
+                        ) {
+                            closeMobileMenu();
+                        }
+                    }
+                );
+            }
 
             function closeMobileMenu() {
+                if (
+                    !mainNav ||
+                    !menuToggle
+                ) {
+                    return;
+                }
+
                 mainNav.classList.remove("open");
 
                 menuToggle.setAttribute(
@@ -1754,7 +1965,8 @@
                     "false"
                 );
 
-                menuToggle.textContent = "☰";
+                menuToggle.textContent =
+                    "☰";
             }
 
             if (yearElement) {
