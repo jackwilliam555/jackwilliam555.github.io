@@ -35,7 +35,6 @@
             --line-dark: #dce1e8;
 
             --blue: #244a80;
-            --blue-dark: #18375f;
             --blue-soft: #eef4fb;
 
             --shadow:
@@ -119,9 +118,9 @@
             margin: 0 auto;
         }
 
-        /* ==============================
+        /* =========================
            顶部导航栏
-        ============================== */
+        ========================= */
 
         .topbar {
             position: sticky;
@@ -257,9 +256,9 @@
             font-size: 18px;
         }
 
-        /* ==============================
-           页面整体布局
-        ============================== */
+        /* =========================
+           页面布局
+        ========================= */
 
         .page-layout {
             display: grid;
@@ -276,9 +275,9 @@
             padding: 40px 0 78px;
         }
 
-        /* ==============================
-           左侧个人信息
-        ============================== */
+        /* =========================
+           左侧个人资料
+        ========================= */
 
         .profile {
             position: sticky;
@@ -307,8 +306,7 @@
         .avatar-wrap:hover {
             box-shadow:
                 0 10px 32px rgba(32, 47, 68, 0.17),
-                0 0 0 1px
-                rgba(255, 255, 255, 0.92) inset;
+                0 0 0 1px rgba(255, 255, 255, 0.92) inset;
 
             transform: scale(1.012);
         }
@@ -369,6 +367,10 @@
             line-height: 1.6;
         }
 
+        /* =========================
+           个人信息列表
+        ========================= */
+
         .profile-meta {
             display: grid;
             gap: 12px;
@@ -418,7 +420,8 @@
             height: 17px;
         }
 
-        .profile-meta .icon-link {
+        .profile-meta .icon-link,
+        .profile-meta .icon-github {
             width: 17px;
             height: 17px;
         }
@@ -426,11 +429,6 @@
         .profile-meta .icon-envelope {
             width: 17px;
             height: 15px;
-        }
-
-        .profile-meta .icon-github {
-            width: 17px;
-            height: 17px;
         }
 
         .profile-meta a {
@@ -464,7 +462,9 @@
             color: var(--blue);
             background: #ffffff;
 
-            border: 1px solid #ced8e5;
+            border:
+                1px solid #ced8e5;
+
             border-radius: 8px;
 
             font-size: 11px;
@@ -485,9 +485,9 @@
             transform: translateY(-1px);
         }
 
-        /* ==============================
+        /* =========================
            右侧内容
-        ============================== */
+        ========================= */
 
         .content {
             min-width: 0;
@@ -517,7 +517,9 @@
 
             background: #fafafa;
 
-            border: 1px solid var(--line);
+            border:
+                1px solid var(--line);
+
             border-radius: 12px;
 
             box-shadow:
@@ -542,9 +544,9 @@
             background: var(--line);
         }
 
-        /* ==============================
+        /* =========================
            教育经历
-        ============================== */
+        ========================= */
 
         .education-card {
             padding: 25px 28px;
@@ -581,7 +583,9 @@
             color: var(--blue);
             background: #ffffff;
 
-            border: 1px solid var(--line);
+            border:
+                1px solid var(--line);
+
             border-radius: 16px;
 
             font-size: 15px;
@@ -628,9 +632,9 @@
             color: #a1a9b4;
         }
 
-        /* ==============================
+        /* =========================
            学业数据
-        ============================== */
+        ========================= */
 
         .stats-grid {
             display: grid;
@@ -650,7 +654,9 @@
 
             background: var(--card-inner);
 
-            border: 1px solid var(--line);
+            border:
+                1px solid var(--line);
+
             border-radius: 13px;
         }
 
@@ -673,15 +679,16 @@
             font-size: 14px;
         }
 
-        /* ==============================
+        /* =========================
            主要课程
-        ============================== */
+        ========================= */
 
         .course-area {
             margin-top: 22px;
             padding-top: 20px;
 
-            border-top: 1px solid var(--line);
+            border-top:
+                1px solid var(--line);
         }
 
         .course-area h4 {
@@ -704,7 +711,9 @@
             color: #586476;
             background: #ffffff;
 
-            border: 1px solid var(--line);
+            border:
+                1px solid var(--line);
+
             border-radius: 8px;
 
             font-size: 12px;
@@ -721,9 +730,9 @@
             border-color: #cedced;
         }
 
-        /* ==============================
+        /* =========================
            荣誉奖励
-        ============================== */
+        ========================= */
 
         .award-grid {
             display: grid;
@@ -776,9 +785,54 @@
             line-height: 1.55;
         }
 
-        /* ==============================
+        /* =========================
+           邮箱复制提示
+        ========================= */
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 30px;
+            z-index: 3000;
+
+            max-width: calc(100% - 32px);
+
+            padding: 11px 16px;
+
+            color: #ffffff;
+            background: rgba(23, 32, 51, 0.94);
+
+            border-radius: 9px;
+
+            box-shadow:
+                0 10px 28px rgba(23, 32, 51, 0.22);
+
+            font-size: 13px;
+            line-height: 1.5;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform:
+                translate(-50%, 14px);
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+
+            transform:
+                translate(-50%, 0);
+        }
+
+        /* =========================
            页脚
-        ============================== */
+        ========================= */
 
         footer {
             padding: 24px 0 36px;
@@ -792,9 +846,9 @@
             text-align: center;
         }
 
-        /* ==============================
+        /* =========================
            中等尺寸电脑
-        ============================== */
+        ========================= */
 
         @media
         (min-width: 901px)
@@ -848,9 +902,9 @@
             }
         }
 
-        /* ==============================
+        /* =========================
            平板
-        ============================== */
+        ========================= */
 
         @media (max-width: 900px) {
             .main-nav {
@@ -927,9 +981,9 @@
             }
         }
 
-        /* ==============================
+        /* =========================
            手机
-        ============================== */
+        ========================= */
 
         @media (max-width: 650px) {
             .container {
@@ -1162,7 +1216,7 @@
         <!-- 左侧个人资料 -->
         <aside class="profile">
 
-            <!-- PNG格式个人证件照 -->
+            <!-- PNG格式证件照 -->
             <div class="avatar-wrap">
 
                 <img
@@ -1259,11 +1313,7 @@
                         </svg>
                     </span>
 
-                    <a
-                        href="https://jackwilliam555.github.io/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                    <a href="index.html">
                         <span class="zh">个人主页</span>
                         <span class="en">Website</span>
                     </a>
@@ -1281,10 +1331,12 @@
                             <path d="M64 112c-8.8 0-16 7.2-16 16v22.1l172.5 141.4c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16h384c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64h384c35.3 0 64 28.7 64 64v256c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/>
                         </svg>
                     </span>
-                    
 
                     <a
-                        href="mailto:1289423102@qq.com?subject=%E6%9D%A5%E8%87%AA%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E7%9A%84%E8%81%94%E7%B3%BB&amp;body=%E6%82%A8%E5%A5%BD%EF%BC%8C%E6%88%91%E9%80%9A%E8%BF%87%E6%82%A8%E7%9A%84%E4%B8%AA%E4%BA%BA%E4%B8%BB%E9%A1%B5%E8%81%94%E7%B3%BB%E6%82%A8%E3%80%82"
+                        class="qq-mail-link"
+                        href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=1289423102@qq.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         title="通过QQ邮箱向王焱杰发送邮件"
                     >
                         <span class="zh">电子邮箱</span>
@@ -1330,8 +1382,8 @@
                 </a>
 
                 <a
-                    class="button-outline"
-                    href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=1289423102%40qq.com"
+                    class="button-outline qq-mail-link"
+                    href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=1289423102@qq.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     title="通过QQ邮箱向王焱杰发送邮件"
@@ -1530,7 +1582,6 @@
                 <div class="award-grid">
 
                     <article class="award-item">
-
                         <h3>
                             <span class="zh">国家级金奖</span>
                             <span class="en">National Gold Award</span>
@@ -1546,11 +1597,9 @@
                                 Innovation Competition
                             </span>
                         </p>
-
                     </article>
 
                     <article class="award-item">
-
                         <h3>
                             <span class="zh">国家级铜奖</span>
                             <span class="en">National Bronze Award</span>
@@ -1566,11 +1615,9 @@
                                 Innovation Competition
                             </span>
                         </p>
-
                     </article>
 
                     <article class="award-item">
-
                         <h3>
                             <span class="zh">省级一等奖</span>
                             <span class="en">Provincial First Prize</span>
@@ -1585,11 +1632,9 @@
                                 Hubei Challenge Cup
                             </span>
                         </p>
-
                     </article>
 
                     <article class="award-item">
-
                         <h3>
                             <span class="zh">省级二等奖</span>
                             <span class="en">Provincial Second Prize</span>
@@ -1605,11 +1650,9 @@
                                 Software and IT Competition
                             </span>
                         </p>
-
                     </article>
 
                     <article class="award-item">
-
                         <h3>
                             <span class="zh">省级铜奖</span>
                             <span class="en">Provincial Bronze Award</span>
@@ -1625,11 +1668,9 @@
                                 Entrepreneurship Competition
                             </span>
                         </p>
-
                     </article>
 
                     <article class="award-item">
-
                         <h3>
                             <span class="zh">一等奖学金</span>
                             <span class="en">First-Class Scholarship</span>
@@ -1644,11 +1685,9 @@
                                 University Scholarship
                             </span>
                         </p>
-
                     </article>
 
                     <article class="award-item">
-
                         <h3>
                             <span class="zh">三好学生</span>
                             <span class="en">Outstanding Student</span>
@@ -1663,11 +1702,9 @@
                                 University Honor
                             </span>
                         </p>
-
                     </article>
 
                     <article class="award-item">
-
                         <h3>
                             <span class="zh">优秀共青团员</span>
 
@@ -1685,7 +1722,6 @@
                                 University Honor
                             </span>
                         </p>
-
                     </article>
 
                 </div>
@@ -1697,17 +1733,37 @@
     </div>
 
     <footer>
-
         <div class="container">
             © <span id="year"></span>
             王焱杰 · Hosted on GitHub Pages
         </div>
-
     </footer>
+
+    <!-- 点击邮箱后的复制提示 -->
+    <div
+        class="toast"
+        id="emailToast"
+        role="status"
+        aria-live="polite"
+    >
+        收件人地址已复制：1289423102@qq.com
+    </div>
 
     <script>
         (function () {
             "use strict";
+
+            const EMAIL_ADDRESS =
+                "1289423102@qq.com";
+
+            /*
+             * QQ邮箱链接统一写在这里。
+             *
+             * 如果你以后在QQ邮箱生成了专属“邮我”链接，
+             * 只需要替换下面这一行，不需要修改其他代码。
+             */
+            const QQ_MAIL_URL =
+                "https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=1289423102@qq.com";
 
             const body =
                 document.body;
@@ -1732,23 +1788,122 @@
                     "year"
                 );
 
+            const emailToast =
+                document.getElementById(
+                    "emailToast"
+                );
+
+            let toastTimer = null;
+
+            /*
+             * 设置所有QQ邮箱链接
+             */
+            document
+                .querySelectorAll(".qq-mail-link")
+                .forEach(function (link) {
+
+                    link.href = QQ_MAIL_URL;
+
+                    link.addEventListener(
+                        "click",
+                        function () {
+                            copyEmailAddress();
+                        }
+                    );
+
+                });
+
+            /*
+             * 复制收件人邮箱作为兜底
+             */
+            function copyEmailAddress() {
+                if (
+                    navigator.clipboard &&
+                    window.isSecureContext
+                ) {
+                    navigator.clipboard
+                        .writeText(EMAIL_ADDRESS)
+                        .then(showEmailToast)
+                        .catch(function () {
+                            fallbackCopyEmail();
+                        });
+
+                    return;
+                }
+
+                fallbackCopyEmail();
+            }
+
+            /*
+             * 兼容不支持Clipboard API的浏览器
+             */
+            function fallbackCopyEmail() {
+                const input =
+                    document.createElement("textarea");
+
+                input.value = EMAIL_ADDRESS;
+                input.setAttribute("readonly", "");
+
+                input.style.position = "fixed";
+                input.style.opacity = "0";
+                input.style.pointerEvents = "none";
+
+                document.body.appendChild(input);
+
+                input.select();
+                input.setSelectionRange(
+                    0,
+                    input.value.length
+                );
+
+                try {
+                    document.execCommand("copy");
+                    showEmailToast();
+                } catch (error) {
+                    console.warn(
+                        "邮箱地址复制失败：",
+                        error
+                    );
+                }
+
+                document.body.removeChild(input);
+            }
+
+            /*
+             * 显示复制提示
+             */
+            function showEmailToast() {
+                emailToast.classList.add("show");
+
+                window.clearTimeout(toastTimer);
+
+                toastTimer = window.setTimeout(
+                    function () {
+                        emailToast.classList.remove(
+                            "show"
+                        );
+                    },
+                    2600
+                );
+            }
+
+            /*
+             * 读取语言设置
+             */
             const savedLanguage =
                 localStorage.getItem(
                     "homepage-language"
                 );
 
             if (savedLanguage === "en") {
-                body.classList.add(
-                    "lang-en"
-                );
-
-                document.documentElement.lang =
-                    "en";
-
-                languageToggle.textContent =
-                    "中";
+                body.classList.add("lang-en");
+                document.documentElement.lang = "en";
+                languageToggle.textContent = "中";
             }
 
+            /*
+             * 中英文切换
+             */
             languageToggle.addEventListener(
                 "click",
                 function () {
@@ -1776,6 +1931,9 @@
                 }
             );
 
+            /*
+             * 手机端菜单
+             */
             menuToggle.addEventListener(
                 "click",
                 function () {
@@ -1802,17 +1960,7 @@
                     link.addEventListener(
                         "click",
                         function () {
-                            mainNav.classList.remove(
-                                "open"
-                            );
-
-                            menuToggle.setAttribute(
-                                "aria-expanded",
-                                "false"
-                            );
-
-                            menuToggle.textContent =
-                                "☰";
+                            closeMobileMenu();
                         }
                     );
                 });
@@ -1837,21 +1985,25 @@
                             "open"
                         )
                     ) {
-                        mainNav.classList.remove(
-                            "open"
-                        );
-
-                        menuToggle.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                        menuToggle.textContent =
-                            "☰";
+                        closeMobileMenu();
                     }
                 }
             );
 
+            function closeMobileMenu() {
+                mainNav.classList.remove("open");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuToggle.textContent = "☰";
+            }
+
+            /*
+             * 自动更新页脚年份
+             */
             if (yearElement) {
                 yearElement.textContent =
                     new Date().getFullYear();
