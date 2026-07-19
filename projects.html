@@ -1,0 +1,2992 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="王焱杰的技术博客，记录可穿戴设备、嵌入式系统、人体运动感知、生理信号处理与机械结构设计。"
+    >
+
+    <title>技术博客 | 王焱杰</title>
+
+    <style>
+        :root {
+            --page-width: 1320px;
+            --sidebar-width: 250px;
+            --content-width: 840px;
+            --nav-height: 62px;
+
+            --background: #ffffff;
+            --card-background: #fbfbfc;
+            --card-inner: #f7f9fc;
+
+            --text: #172033;
+            --text-secondary: #49566a;
+            --muted: #687487;
+            --light-muted: #8b96a5;
+
+            --line: #e6e9ee;
+            --line-dark: #dce1e8;
+
+            --blue: #244a80;
+            --blue-light: #507aad;
+            --blue-soft: #eef4fb;
+
+            --green: #317259;
+            --green-soft: #edf7f2;
+
+            --purple: #705990;
+            --purple-soft: #f4eff9;
+
+            --orange: #9b681c;
+            --orange-soft: #fff6e7;
+
+            --shadow:
+                0 9px 26px rgba(32, 47, 68, 0.06);
+
+            --shadow-hover:
+                0 16px 38px rgba(32, 47, 68, 0.11);
+
+            --shadow-avatar:
+                0 7px 24px rgba(32, 47, 68, 0.12),
+                0 0 0 1px rgba(255, 255, 255, 0.85) inset;
+
+            --radius-full: 9999px;
+
+            --transition:
+                0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            color: var(--text);
+            background: var(--background);
+
+            font-family:
+                Inter,
+                "Microsoft YaHei",
+                "PingFang SC",
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size: 16px;
+            line-height: 1.68;
+
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body.lang-en .zh {
+            display: none !important;
+        }
+
+        body:not(.lang-en) .en {
+            display: none !important;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .container {
+            width: min(
+                var(--page-width),
+                calc(100% - 40px)
+            );
+
+            margin: 0 auto;
+        }
+
+        /* 顶部导航栏 */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            min-height: var(--nav-height);
+
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid var(--line);
+
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .topbar-inner {
+            min-height: var(--nav-height);
+
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .brand {
+            flex: 0 0 auto;
+
+            color: var(--text);
+
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: 0.01em;
+
+            transition: color var(--transition);
+        }
+
+        .brand:hover {
+            color: var(--blue);
+        }
+
+        .main-nav {
+            flex: 1;
+        }
+
+        .nav-list {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            list-style: none;
+        }
+
+        .nav-link {
+            min-height: 40px;
+
+            display: inline-flex;
+            align-items: center;
+
+            padding: 7px 13px;
+
+            color: #435064;
+            border-radius: 8px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition:
+                color var(--transition),
+                background var(--transition);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--blue);
+            background: var(--blue-soft);
+        }
+
+        .language-toggle {
+            flex: 0 0 auto;
+
+            min-width: 44px;
+            height: 29px;
+
+            padding: 0 11px;
+
+            color: #3f4e63;
+            background: #ffffff;
+
+            border: 1px solid var(--line-dark);
+            border-radius: var(--radius-full);
+
+            box-shadow:
+                0 2px 8px rgba(32, 47, 68, 0.06);
+
+            font-size: 11px;
+            font-weight: 700;
+
+            transition:
+                color var(--transition),
+                border-color var(--transition),
+                box-shadow var(--transition);
+        }
+
+        .language-toggle:hover {
+            color: var(--blue);
+            border-color: #b9c8d9;
+
+            box-shadow:
+                0 4px 12px rgba(32, 47, 68, 0.09);
+        }
+
+        .menu-toggle {
+            display: none;
+
+            width: 38px;
+            height: 38px;
+
+            margin-left: auto;
+
+            color: var(--text);
+            background: #ffffff;
+
+            border: 1px solid var(--line-dark);
+            border-radius: 9px;
+
+            font-size: 18px;
+        }
+
+        /* 页面布局 */
+
+        .page-layout {
+            display: grid;
+
+            grid-template-columns:
+                var(--sidebar-width)
+                minmax(0, var(--content-width));
+
+            justify-content: center;
+            align-items: start;
+
+            gap: 60px;
+
+            padding: 40px 0 78px;
+        }
+
+        /* 左侧个人资料 */
+
+        .profile {
+            position: sticky;
+            top: calc(var(--nav-height) + 28px);
+        }
+
+        .avatar-wrap {
+            width: 182px;
+            height: 182px;
+
+            margin-bottom: 22px;
+            padding: 5px;
+
+            overflow: hidden;
+
+            background: #ffffff;
+            border-radius: 50%;
+
+            box-shadow: var(--shadow-avatar);
+
+            transition:
+                box-shadow var(--transition),
+                transform var(--transition);
+        }
+
+        .avatar-wrap:hover {
+            box-shadow:
+                0 10px 32px rgba(32, 47, 68, 0.17),
+                0 0 0 1px rgba(255, 255, 255, 0.92) inset;
+
+            transform: scale(1.012);
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            object-position: center;
+
+            background: #f0f4fa;
+            border-radius: 50%;
+        }
+
+        .avatar-fallback {
+            display: none;
+            place-items: center;
+
+            width: 100%;
+            height: 100%;
+
+            color: var(--blue);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #eff5fc,
+                    #f9fbfd
+                );
+
+            border-radius: 50%;
+
+            font-size: 38px;
+            font-weight: 800;
+        }
+
+        .profile-name {
+            color: #273246;
+
+            font-size: 25px;
+            line-height: 1.03;
+        }
+
+        .profile-name span {
+            display: block;
+        }
+
+        .profile-role {
+            max-width: 220px;
+
+            margin-top: 11px;
+
+            color: #4f5c6e;
+
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .profile-meta {
+            display: grid;
+            gap: 12px;
+
+            margin-top: 23px;
+
+            list-style: none;
+        }
+
+        .profile-meta li {
+            display: grid;
+
+            grid-template-columns:
+                20px minmax(0, 1fr);
+
+            gap: 9px;
+            align-items: center;
+
+            color: #536071;
+
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .profile-meta .icon {
+            width: 17px;
+            height: 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #111827;
+        }
+
+        .profile-meta .icon svg {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+
+            fill: currentColor;
+        }
+
+        .profile-meta .icon-location {
+            width: 14px;
+            height: 17px;
+        }
+
+        .profile-meta .icon-link,
+        .profile-meta .icon-github {
+            width: 17px;
+            height: 17px;
+        }
+
+        .profile-meta .icon-envelope {
+            width: 17px;
+            height: 15px;
+        }
+
+        .profile-meta a {
+            overflow-wrap: anywhere;
+
+            transition: color var(--transition);
+        }
+
+        .profile-meta a:hover {
+            color: var(--blue);
+        }
+
+        .profile-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+
+            margin-top: 22px;
+        }
+
+        .button-outline {
+            min-height: 36px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 7px 13px;
+
+            color: var(--blue);
+            background: #ffffff;
+
+            border: 1px solid #ced8e5;
+            border-radius: 8px;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            transition:
+                color var(--transition),
+                background var(--transition),
+                border-color var(--transition),
+                transform var(--transition);
+        }
+
+        .button-outline:hover {
+            color: #ffffff;
+            background: var(--blue);
+            border-color: var(--blue);
+
+            transform: translateY(-1px);
+        }
+
+        /* 右侧内容 */
+
+        .content {
+            min-width: 0;
+            width: 100%;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            margin-bottom: 19px;
+        }
+
+        .heading-icon {
+            flex: 0 0 39px;
+
+            width: 39px;
+            height: 39px;
+
+            display: grid;
+            place-items: center;
+
+            background: #fafafa;
+
+            border: 1px solid var(--line);
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 10px rgba(32, 47, 68, 0.045);
+
+            font-size: 17px;
+        }
+
+        .section-title {
+            flex: 0 0 auto;
+
+            color: var(--text);
+
+            font-size: 25px;
+            line-height: 1.2;
+        }
+
+        .heading-line {
+            flex: 1;
+            height: 1px;
+
+            background: var(--line);
+        }
+
+        /* 博客介绍 */
+
+        .blog-intro {
+            padding: 25px 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f7faff 0%,
+                    #fbfcfd 100%
+                );
+
+            border: 1px solid var(--line-dark);
+            border-radius: 19px;
+
+            box-shadow: var(--shadow);
+        }
+
+        .blog-intro h2 {
+            color: var(--text);
+
+            font-size: 19px;
+            line-height: 1.5;
+        }
+
+        .blog-intro p {
+            max-width: 730px;
+
+            margin-top: 9px;
+
+            color: var(--text-secondary);
+
+            font-size: 14px;
+            line-height: 1.85;
+
+            text-align: justify;
+            text-justify: inter-ideograph;
+            text-indent: 2em;
+        }
+
+        body.lang-en .blog-intro p {
+            text-align: left;
+            text-indent: 0;
+        }
+
+        .blog-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            margin-top: 18px;
+        }
+
+        .summary-item {
+            min-height: 31px;
+
+            display: inline-flex;
+            align-items: center;
+
+            padding: 5px 12px;
+
+            color: #4e5d72;
+            background: #ffffff;
+
+            border: 1px solid var(--line-dark);
+            border-radius: 9px;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* 分类筛选 */
+
+        .filter-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+
+            margin: 27px 0 19px;
+        }
+
+        .filter-title {
+            color: #344156;
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .filter-button {
+            min-height: 32px;
+
+            padding: 5px 12px;
+
+            color: #5a687c;
+            background: #ffffff;
+
+            border: 1px solid var(--line-dark);
+            border-radius: var(--radius-full);
+
+            font-size: 11px;
+            font-weight: 700;
+
+            transition:
+                color var(--transition),
+                background var(--transition),
+                border-color var(--transition);
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            color: #ffffff;
+            background: var(--blue);
+            border-color: var(--blue);
+        }
+
+        /* 精选文章 */
+
+        .featured-post {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 0.92fr)
+                minmax(0, 1.08fr);
+
+            overflow: hidden;
+
+            background: var(--card-background);
+
+            border: 1px solid var(--line-dark);
+            border-radius: 18px;
+
+            box-shadow: var(--shadow);
+
+            transition:
+                transform var(--transition),
+                box-shadow var(--transition),
+                border-color var(--transition);
+        }
+
+        .featured-post:hover {
+            border-color: #ccd7e4;
+
+            box-shadow: var(--shadow-hover);
+
+            transform: translateY(-3px);
+        }
+
+        .featured-image {
+            position: relative;
+
+            min-height: 300px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #dfeaf6,
+                    #eef3f8
+                );
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            object-position: center;
+
+            transition: transform 0.5s ease;
+        }
+
+        .featured-post:hover .featured-image img {
+            transform: scale(1.04);
+        }
+
+        .image-fallback {
+            display: none;
+            place-items: center;
+
+            width: 100%;
+            height: 100%;
+
+            color: var(--blue);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #e6eef8,
+                    #f6f9fc
+                );
+
+            font-size: 42px;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 2;
+
+            display: inline-flex;
+            align-items: center;
+
+            min-height: 27px;
+
+            padding: 4px 11px;
+
+            color: #ffffff;
+            background: rgba(36, 74, 128, 0.88);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.22);
+
+            border-radius: var(--radius-full);
+
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .featured-content {
+            padding: 25px 27px;
+        }
+
+        .post-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 7px 13px;
+
+            color: var(--light-muted);
+
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .post-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .post-meta span + span::before {
+            content: "";
+
+            width: 4px;
+            height: 4px;
+
+            background: #a4afbc;
+            border-radius: 50%;
+        }
+
+        .featured-content h2 {
+            margin-top: 12px;
+
+            color: var(--text);
+
+            font-size: 21px;
+            line-height: 1.45;
+        }
+
+        .post-excerpt {
+            margin-top: 11px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+            line-height: 1.8;
+
+            text-align: justify;
+            text-justify: inter-ideograph;
+            text-indent: 2em;
+        }
+
+        body.lang-en .post-excerpt {
+            text-align: left;
+            text-indent: 0;
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+
+            margin-top: 15px;
+        }
+
+        .post-tag {
+            padding: 4px 9px;
+
+            border-radius: var(--radius-full);
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .tag-blue {
+            color: var(--blue);
+            background: var(--blue-soft);
+        }
+
+        .tag-green {
+            color: var(--green);
+            background: var(--green-soft);
+        }
+
+        .tag-purple {
+            color: var(--purple);
+            background: var(--purple-soft);
+        }
+
+        .tag-orange {
+            color: var(--orange);
+            background: var(--orange-soft);
+        }
+
+        /* 文章展开 */
+
+        .post-details {
+            margin-top: 17px;
+            padding-top: 14px;
+
+            border-top: 1px solid var(--line);
+        }
+
+        .post-details summary {
+            width: max-content;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            color: var(--blue);
+
+            font-size: 11px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            list-style: none;
+        }
+
+        .post-details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .post-details summary::after {
+            content: "→";
+
+            font-size: 14px;
+
+            transition: transform var(--transition);
+        }
+
+        .post-details[open] summary::after {
+            transform: rotate(90deg);
+        }
+
+        .detail-content {
+            margin-top: 16px;
+            padding: 17px 18px;
+
+            color: #596779;
+            background: var(--card-inner);
+
+            border: 1px solid var(--line);
+            border-radius: 12px;
+
+            font-size: 12px;
+            line-height: 1.75;
+        }
+
+        .detail-content h3 {
+            margin-top: 15px;
+
+            color: #324056;
+
+            font-size: 13px;
+        }
+
+        .detail-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .detail-content p {
+            margin-top: 7px;
+
+            text-align: justify;
+            text-justify: inter-ideograph;
+            text-indent: 2em;
+        }
+
+        .detail-content ul {
+            display: grid;
+            gap: 7px;
+
+            margin-top: 9px;
+            padding-left: 20px;
+        }
+
+        body.lang-en .detail-content p {
+            text-align: left;
+            text-indent: 0;
+        }
+
+        /* 普通文章网格 */
+
+        .post-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 17px;
+
+            margin-top: 18px;
+        }
+
+        .blog-post {
+            min-width: 0;
+
+            overflow: hidden;
+
+            background: #ffffff;
+
+            border: 1px solid var(--line-dark);
+            border-radius: 16px;
+
+            box-shadow:
+                0 5px 17px rgba(32, 47, 68, 0.045);
+
+            transition:
+                transform var(--transition),
+                box-shadow var(--transition),
+                border-color var(--transition);
+        }
+
+        .blog-post:hover {
+            border-color: #ced8e4;
+
+            box-shadow: var(--shadow-hover);
+
+            transform: translateY(-4px);
+        }
+
+        .post-cover {
+            position: relative;
+
+            width: 100%;
+            aspect-ratio: 16 / 9;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #e7eef6,
+                    #f6f9fc
+                );
+        }
+
+        .post-cover img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+            object-position: center;
+
+            transition: transform 0.45s ease;
+        }
+
+        .blog-post:hover .post-cover img {
+            transform: scale(1.045);
+        }
+
+        .post-category {
+            position: absolute;
+            top: 11px;
+            left: 11px;
+            z-index: 2;
+
+            min-height: 25px;
+
+            display: inline-flex;
+            align-items: center;
+
+            padding: 4px 10px;
+
+            color: #ffffff;
+            background: rgba(23, 32, 51, 0.76);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.2);
+
+            border-radius: var(--radius-full);
+
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .post-body {
+            padding: 17px 18px 18px;
+        }
+
+        .post-body h2 {
+            margin-top: 9px;
+
+            color: var(--text);
+
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        .post-body .post-excerpt {
+            font-size: 12px;
+            line-height: 1.75;
+        }
+
+        .blog-post.hidden,
+        .featured-post.hidden {
+            display: none;
+        }
+
+        /* 空内容提示 */
+
+        .empty-message {
+            display: none;
+
+            padding: 34px 20px;
+            margin-top: 18px;
+
+            color: var(--muted);
+            background: var(--card-background);
+
+            border: 1px dashed var(--line-dark);
+            border-radius: 15px;
+
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .empty-message.show {
+            display: block;
+        }
+
+        /* 邮箱提示 */
+
+        .toast {
+            position: fixed;
+
+            left: 50%;
+            bottom: 30px;
+            z-index: 3000;
+
+            width: max-content;
+            max-width: calc(100% - 30px);
+
+            padding: 12px 18px;
+
+            color: #ffffff;
+            background: rgba(23, 32, 51, 0.96);
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 12px 35px rgba(23, 32, 51, 0.25);
+
+            font-size: 13px;
+            text-align: center;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transform: translate(-50%, 15px);
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+
+            transform: translate(-50%, 0);
+        }
+
+        footer {
+            padding: 24px 0 36px;
+
+            color: var(--light-muted);
+
+            border-top: 1px solid var(--line);
+
+            font-size: 11px;
+            text-align: center;
+        }
+
+        /* 中等尺寸电脑 */
+
+        @media
+        (min-width: 901px)
+        and (max-width: 1180px) {
+
+            :root {
+                --page-width: 1040px;
+                --sidebar-width: 220px;
+                --content-width: 730px;
+            }
+
+            .page-layout {
+                gap: 42px;
+            }
+
+            .avatar-wrap {
+                width: 164px;
+                height: 164px;
+            }
+
+            .profile-name {
+                font-size: 22px;
+            }
+
+            .profile-role {
+                font-size: 13px;
+            }
+
+            .profile-meta li {
+                font-size: 12px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .featured-content {
+                padding: 22px;
+            }
+
+            .featured-content h2 {
+                font-size: 19px;
+            }
+
+            .post-grid {
+                gap: 14px;
+            }
+        }
+
+        /* 平板 */
+
+        @media (max-width: 900px) {
+            .main-nav {
+                position: fixed;
+
+                top: calc(var(--nav-height) + 8px);
+                left: 18px;
+                right: 18px;
+
+                display: none;
+
+                padding: 9px;
+
+                background: #ffffff;
+
+                border: 1px solid var(--line-dark);
+                border-radius: 12px;
+
+                box-shadow: var(--shadow-hover);
+            }
+
+            .main-nav.open {
+                display: block;
+            }
+
+            .nav-list {
+                display: grid;
+            }
+
+            .nav-link {
+                width: 100%;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .page-layout {
+                grid-template-columns: 1fr;
+
+                gap: 34px;
+
+                padding-top: 32px;
+            }
+
+            .profile {
+                position: static;
+
+                display: grid;
+
+                grid-template-columns:
+                    145px minmax(0, 1fr);
+
+                gap: 23px;
+                align-items: start;
+            }
+
+            .avatar-wrap {
+                width: 145px;
+                height: 145px;
+
+                margin: 0;
+            }
+
+            .profile-meta,
+            .profile-actions {
+                grid-column: 2;
+            }
+        }
+
+        /* 手机 */
+
+        @media (max-width: 650px) {
+            .container {
+                width: min(
+                    calc(100% - 26px),
+                    var(--page-width)
+                );
+            }
+
+            .topbar-inner {
+                gap: 10px;
+            }
+
+            .brand {
+                font-size: 15px;
+            }
+
+            .page-layout {
+                padding-top: 28px;
+            }
+
+            .profile {
+                grid-template-columns:
+                    94px minmax(0, 1fr);
+
+                gap: 16px;
+            }
+
+            .avatar-wrap {
+                width: 94px;
+                height: 94px;
+            }
+
+            .profile-name {
+                font-size: 19px;
+            }
+
+            .profile-role {
+                margin-top: 6px;
+
+                font-size: 12px;
+            }
+
+            .profile-meta,
+            .profile-actions {
+                grid-column: 1 / -1;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .heading-icon {
+                flex-basis: 34px;
+
+                width: 34px;
+                height: 34px;
+
+                font-size: 15px;
+            }
+
+            .blog-intro {
+                padding: 19px;
+            }
+
+            .blog-intro h2 {
+                font-size: 17px;
+            }
+
+            .blog-intro p {
+                font-size: 13px;
+                line-height: 1.8;
+            }
+
+            .filter-area {
+                display: block;
+            }
+
+            .filter-buttons {
+                justify-content: flex-start;
+
+                margin-top: 11px;
+            }
+
+            .featured-post {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-image {
+                min-height: auto;
+                aspect-ratio: 16 / 9;
+            }
+
+            .featured-content {
+                padding: 19px;
+            }
+
+            .featured-content h2 {
+                font-size: 18px;
+            }
+
+            .post-grid {
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+            }
+
+            .post-body {
+                padding: 16px 17px 18px;
+            }
+
+            .post-body h2 {
+                font-size: 17px;
+            }
+
+            .post-excerpt {
+                font-size: 13px !important;
+            }
+
+            .detail-content {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .profile {
+                grid-template-columns:
+                    78px minmax(0, 1fr);
+            }
+
+            .avatar-wrap {
+                width: 78px;
+                height: 78px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 顶部导航栏 -->
+    <header class="topbar">
+
+        <div class="container topbar-inner">
+
+            <a
+                class="brand"
+                href="index.html"
+            >
+                王焱杰
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="展开导航菜单"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+
+            <nav
+                class="main-nav"
+                id="mainNav"
+            >
+                <ul class="nav-list">
+
+                    <li>
+                        <a
+                            class="nav-link"
+                            href="news.html"
+                        >
+                            <span class="zh">动态</span>
+                            <span class="en">News</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            class="nav-link"
+                            href="index.html"
+                        >
+                            <span class="zh">教育</span>
+                            <span class="en">Education</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            class="nav-link"
+                            href="publications.html"
+                        >
+                            <span class="zh">论文</span>
+                            <span class="en">Publications</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            class="nav-link active"
+                            href="projects.html"
+                            aria-current="page"
+                        >
+                            <span class="zh">项目</span>
+                            <span class="en">Projects</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                            class="nav-link"
+                            href="life.html"
+                        >
+                            <span class="zh">生活</span>
+                            <span class="en">Life</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <button
+                class="language-toggle"
+                id="languageToggle"
+                type="button"
+                aria-label="切换中英文"
+            >
+                EN
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- 页面主体 -->
+    <div class="container page-layout">
+
+        <!-- 左侧个人资料 -->
+        <aside class="profile">
+
+            <div class="avatar-wrap">
+
+                <img
+                    class="avatar"
+                    src="assets/images/avatar.png"
+                    alt="王焱杰个人证件照"
+                    width="500"
+                    height="500"
+                    decoding="async"
+                    onerror="
+                        this.style.display='none';
+                        this.nextElementSibling.style.display='grid';
+                    "
+                >
+
+                <div class="avatar-fallback">
+                    WYJ
+                </div>
+
+            </div>
+
+            <div class="profile-main">
+
+                <h1 class="profile-name">
+                    <span>Yanjie</span>
+                    <span>Wang</span>
+                </h1>
+
+                <p class="profile-role">
+
+                    <span class="zh">
+                        机械电子工程专业本科生<br>
+                        研究兴趣：可穿戴设备、机器人
+                    </span>
+
+                    <span class="en">
+                        Undergraduate Student in<br>
+                        Mechatronic Engineering
+                    </span>
+
+                </p>
+
+            </div>
+
+            <ul class="profile-meta">
+
+                <!-- 所在地 -->
+                <li>
+
+                    <span
+                        class="icon icon-location"
+                        aria-hidden="true"
+                    >
+                        <svg viewBox="0 0 384 512">
+                            <path d="M384 192c0 87.4-117 243-168.3 307.2-12.3 15.3-35.1 15.3-47.4 0C117 435 0 279.4 0 192 0 86 86 0 192 0s192 86 192 192zm-192 64a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        <span class="zh">中国，武汉</span>
+                        <span class="en">Wuhan, China</span>
+                    </span>
+
+                </li>
+
+                <!-- 学校 -->
+                <li>
+
+                    <span
+                        class="icon"
+                        aria-hidden="true"
+                    >
+                        <svg viewBox="0 0 576 512">
+                            <path d="M288 0L0 128l48 21.3V384h32V163.6L288 256l288-128L288 0zm-112 236.4V336c0 44.2 50.1 80 112 80s112-35.8 112-80v-99.6L288 286.2 176 236.4z"/>
+                        </svg>
+                    </span>
+
+                    <span>
+                        <span class="zh">武汉体育学院</span>
+                        <span class="en">Wuhan Sports University</span>
+                    </span>
+
+                </li>
+
+                <!-- 个人主页 -->
+                <li>
+
+                    <span
+                        class="icon icon-link"
+                        aria-hidden="true"
+                    >
+                        <svg viewBox="0 0 512 512">
+                            <path d="M0 256C0 167.6 71.6 96 160 96h72c13.3 0 24 10.7 24 24s-10.7 24-24 24h-72C98.1 144 48 194.1 48 256s50.1 112 112 112h72c13.3 0 24 10.7 24 24s-10.7 24-24 24h-72C71.6 416 0 344.4 0 256zm192-24h128c13.3 0 24 10.7 24 24s-10.7 24-24 24H192c-13.3 0-24-10.7-24-24s10.7-24 24-24zM352 96h-72c-13.3 0-24-10.7-24-24s10.7-24 24-24h72c88.4 0 160 71.6 160 160s-71.6 160-160 160h-72c-13.3 0-24-10.7-24-24s10.7-24 24-24h72c61.9 0 112-50.1 112-112S413.9 96 352 96z"/>
+                        </svg>
+                    </span>
+
+                    <a href="index.html">
+                        <span class="zh">个人主页</span>
+                        <span class="en">Website</span>
+                    </a>
+
+                </li>
+
+                <!-- 电子邮箱 -->
+                <li>
+
+                    <span
+                        class="icon icon-envelope"
+                        aria-hidden="true"
+                    >
+                        <svg viewBox="0 0 512 512">
+                            <path d="M64 112c-8.8 0-16 7.2-16 16v22.1l172.5 141.4c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16h384c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64h384c35.3 0 64 28.7 64 64v256c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z"/>
+                        </svg>
+                    </span>
+
+                    <a
+                        class="qq-mail-link"
+                        href="https://mail.qq.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="打开QQ邮箱并复制邮箱地址"
+                    >
+                        <span class="zh">电子邮箱</span>
+                        <span class="en">Email</span>
+                    </a>
+
+                </li>
+
+                <!-- GitHub -->
+                <li>
+
+                    <span
+                        class="icon icon-github"
+                        aria-hidden="true"
+                    >
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297 24 5.67 18.627.297 12 .297z"/>
+                        </svg>
+                    </span>
+
+                    <a
+                        href="https://github.com/jackwilliam555"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GitHub
+                    </a>
+
+                </li>
+
+            </ul>
+
+            <div class="profile-actions">
+
+                <a
+                    class="button-outline"
+                    href="files/CV.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <span class="zh">个人简历</span>
+                    <span class="en">CV</span>
+                </a>
+
+                <a
+                    class="button-outline qq-mail-link"
+                    href="https://mail.qq.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <span class="zh">联系我</span>
+                    <span class="en">Contact</span>
+                </a>
+
+            </div>
+
+        </aside>
+
+        <!-- 技术博客主体 -->
+        <main class="content">
+
+            <section>
+
+                <div class="section-heading">
+
+                    <div class="heading-icon">
+                        💻
+                    </div>
+
+                    <h1 class="section-title">
+                        <span class="zh">技术博客</span>
+                        <span class="en">Technical Blog</span>
+                    </h1>
+
+                    <div class="heading-line"></div>
+
+                </div>
+
+                <!-- 博客介绍 -->
+                <article class="blog-intro">
+
+                    <h2>
+                        <span class="zh">
+                            工程实践、技术思考与项目复盘
+                        </span>
+
+                        <span class="en">
+                            Engineering Practice and Technical Notes
+                        </span>
+                    </h2>
+
+                    <p>
+                        <span class="zh">
+                            这里记录我在可穿戴设备、人体运动感知、生理信号处理、
+                            嵌入式系统和机械结构设计等方向的学习与实践。内容主要来自
+                            项目开发过程中的方案设计、实验验证、问题排查和工程总结。
+                        </span>
+
+                        <span class="en">
+                            This blog records my work in wearable devices,
+                            human motion sensing, physiological signal
+                            processing, embedded systems and mechanical design.
+                        </span>
+                    </p>
+
+                    <div class="blog-summary">
+
+                        <span class="summary-item">
+                            <span class="zh">4 篇技术文章</span>
+                            <span class="en">4 Technical Posts</span>
+                        </span>
+
+                        <span class="summary-item">
+                            <span class="zh">持续更新</span>
+                            <span class="en">Continuously Updated</span>
+                        </span>
+
+                        <span class="summary-item">
+                            <span class="zh">项目驱动</span>
+                            <span class="en">Project-Oriented</span>
+                        </span>
+
+                    </div>
+
+                </article>
+
+                <!-- 分类筛选 -->
+                <div class="filter-area">
+
+                    <div class="filter-title">
+                        <span class="zh">文章分类</span>
+                        <span class="en">Categories</span>
+                    </div>
+
+                    <div class="filter-buttons">
+
+                        <button
+                            class="filter-button active"
+                            type="button"
+                            data-filter="all"
+                        >
+                            <span class="zh">全部</span>
+                            <span class="en">All</span>
+                        </button>
+
+                        <button
+                            class="filter-button"
+                            type="button"
+                            data-filter="embedded"
+                        >
+                            <span class="zh">嵌入式系统</span>
+                            <span class="en">Embedded</span>
+                        </button>
+
+                        <button
+                            class="filter-button"
+                            type="button"
+                            data-filter="signal"
+                        >
+                            <span class="zh">信号处理</span>
+                            <span class="en">Signal Processing</span>
+                        </button>
+
+                        <button
+                            class="filter-button"
+                            type="button"
+                            data-filter="mechanical"
+                        >
+                            <span class="zh">机械设计</span>
+                            <span class="en">Mechanical Design</span>
+                        </button>
+
+                        <button
+                            class="filter-button"
+                            type="button"
+                            data-filter="review"
+                        >
+                            <span class="zh">项目复盘</span>
+                            <span class="en">Project Review</span>
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- 精选文章 -->
+                <article
+                    class="featured-post blog-filter-item"
+                    data-category="embedded review"
+                >
+
+                    <div class="featured-image">
+
+                        <img
+                            src="assets/images/projects/imu-system.jpg"
+                            alt="多节点惯性姿态采集系统"
+                            loading="eager"
+                            decoding="async"
+                            onerror="
+                                this.style.display='none';
+                                this.nextElementSibling.style.display='grid';
+                            "
+                        >
+
+                        <div class="image-fallback">
+                            🧭
+                        </div>
+
+                        <span class="featured-badge">
+                            <span class="zh">精选文章</span>
+                            <span class="en">Featured</span>
+                        </span>
+
+                    </div>
+
+                    <div class="featured-content">
+
+                        <div class="post-meta">
+
+                            <span>2026.07</span>
+
+                            <span>
+                                <span class="zh">嵌入式系统</span>
+                                <span class="en">Embedded Systems</span>
+                            </span>
+
+                            <span>
+                                <span class="zh">约 8 分钟</span>
+                                <span class="en">8 min read</span>
+                            </span>
+
+                        </div>
+
+                        <h2>
+                            <span class="zh">
+                                多节点惯性姿态采集系统：从传感器节点到人体运动捕捉
+                            </span>
+
+                            <span class="en">
+                                Multi-Node Inertial Motion Capture:
+                                From Sensor Nodes to Human Motion Tracking
+                            </span>
+                        </h2>
+
+                        <p class="post-excerpt">
+
+                            <span class="zh">
+                                本文梳理多节点人体动作捕捉系统的整体架构，
+                                包括惯性传感器数据采集、零偏校准、姿态解算、
+                                无线通信、上位机接收和人体姿态重构等关键环节。
+                            </span>
+
+                            <span class="en">
+                                This article introduces the architecture of
+                                a multi-node inertial motion capture system,
+                                including sensing, calibration, attitude
+                                estimation and wireless communication.
+                            </span>
+
+                        </p>
+
+                        <div class="post-tags">
+
+                            <span class="post-tag tag-blue">
+                                IMU
+                            </span>
+
+                            <span class="post-tag tag-green">
+                                STM32
+                            </span>
+
+                            <span class="post-tag tag-purple">
+                                EKF
+                            </span>
+
+                            <span class="post-tag tag-orange">
+                                Motion Capture
+                            </span>
+
+                        </div>
+
+                        <details class="post-details">
+
+                            <summary>
+                                <span class="zh">阅读全文</span>
+                                <span class="en">Read More</span>
+                            </summary>
+
+                            <div class="detail-content">
+
+                                <h3>
+                                    <span class="zh">一、系统整体架构</span>
+                                    <span class="en">1. System Architecture</span>
+                                </h3>
+
+                                <p>
+                                    <span class="zh">
+                                        系统由多个可穿戴惯性传感器节点、无线通信网络、
+                                        数据接收终端和人体姿态重构程序组成。每个节点负责
+                                        采集局部肢段的加速度、角速度和磁场信息，并输出姿态四元数。
+                                    </span>
+
+                                    <span class="en">
+                                        The system consists of wearable
+                                        inertial nodes, wireless communication,
+                                        a receiver and motion reconstruction software.
+                                    </span>
+                                </p>
+
+                                <h3>
+                                    <span class="zh">二、节点数据处理流程</span>
+                                    <span class="en">2. Node Processing Flow</span>
+                                </h3>
+
+                                <ul>
+                                    <li>
+                                        <span class="zh">
+                                            读取加速度计、陀螺仪和磁力计数据；
+                                        </span>
+
+                                        <span class="en">
+                                            Acquire accelerometer, gyroscope
+                                            and magnetometer data.
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <span class="zh">
+                                            完成零偏补偿、尺度校准与异常值检查；
+                                        </span>
+
+                                        <span class="en">
+                                            Perform bias correction and calibration.
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <span class="zh">
+                                            使用互补滤波或扩展卡尔曼滤波完成姿态融合；
+                                        </span>
+
+                                        <span class="en">
+                                            Estimate attitude using complementary
+                                            filtering or EKF.
+                                        </span>
+                                    </li>
+
+                                    <li>
+                                        <span class="zh">
+                                            将节点编号、时间戳和姿态四元数组帧发送。
+                                        </span>
+
+                                        <span class="en">
+                                            Transmit node ID, timestamp
+                                            and quaternion data.
+                                        </span>
+                                    </li>
+                                </ul>
+
+                                <h3>
+                                    <span class="zh">三、主要工程难点</span>
+                                    <span class="en">3. Engineering Challenges</span>
+                                </h3>
+
+                                <p>
+                                    <span class="zh">
+                                        实际开发中需要重点解决节点时间同步、陀螺仪漂移、
+                                        磁场干扰、无线丢包和传感器安装误差。相比单节点姿态解算，
+                                        多节点系统更强调各节点数据之间的同步性和坐标系一致性。
+                                    </span>
+
+                                    <span class="en">
+                                        Major challenges include synchronization,
+                                        gyroscope drift, magnetic interference,
+                                        packet loss and sensor alignment.
+                                    </span>
+                                </p>
+
+                            </div>
+
+                        </details>
+
+                    </div>
+
+                </article>
+
+                <!-- 普通文章 -->
+                <div class="post-grid">
+
+                    <!-- PPG文章 -->
+                    <article
+                        class="blog-post blog-filter-item"
+                        data-category="signal embedded review"
+                    >
+
+                        <div class="post-cover">
+
+                            <img
+                                src="assets/images/projects/ppg-heart-rate.jpg"
+                                alt="运动状态下PPG心率估计"
+                                loading="lazy"
+                                decoding="async"
+                                onerror="
+                                    this.style.display='none';
+                                    this.nextElementSibling.style.display='grid';
+                                "
+                            >
+
+                            <div class="image-fallback">
+                                ❤️
+                            </div>
+
+                            <span class="post-category">
+                                <span class="zh">信号处理</span>
+                                <span class="en">Signal Processing</span>
+                            </span>
+
+                        </div>
+
+                        <div class="post-body">
+
+                            <div class="post-meta">
+
+                                <span>2026.07</span>
+
+                                <span>
+                                    <span class="zh">约 6 分钟</span>
+                                    <span class="en">6 min read</span>
+                                </span>
+
+                            </div>
+
+                            <h2>
+                                <span class="zh">
+                                    ACC辅助的运动PPG心率估计方法
+                                </span>
+
+                                <span class="en">
+                                    ACC-Assisted Motion PPG Heart Rate Estimation
+                                </span>
+                            </h2>
+
+                            <p class="post-excerpt">
+
+                                <span class="zh">
+                                    运动状态下的PPG信号容易受到手腕位移、皮肤接触变化
+                                    和环境光干扰。本文介绍如何利用三轴加速度信息识别
+                                    运动伪影，并提高心率输出的连续性和稳定性。
+                                </span>
+
+                                <span class="en">
+                                    This article discusses the use of
+                                    accelerometer information to improve
+                                    motion PPG heart-rate estimation.
+                                </span>
+
+                            </p>
+
+                            <div class="post-tags">
+
+                                <span class="post-tag tag-blue">
+                                    PPG
+                                </span>
+
+                                <span class="post-tag tag-green">
+                                    ACC
+                                </span>
+
+                                <span class="post-tag tag-purple">
+                                    MATLAB
+                                </span>
+
+                            </div>
+
+                            <details class="post-details">
+
+                                <summary>
+                                    <span class="zh">阅读全文</span>
+                                    <span class="en">Read More</span>
+                                </summary>
+
+                                <div class="detail-content">
+
+                                    <h3>
+                                        <span class="zh">一、问题来源</span>
+                                        <span class="en">1. Problem</span>
+                                    </h3>
+
+                                    <p>
+                                        <span class="zh">
+                                            PPG通过检测血容量随心搏产生的周期性变化估计心率。
+                                            在运动状态下，传感器与皮肤之间的相对位移会引入较强
+                                            的运动伪影，其频率可能与真实心率接近。
+                                        </span>
+
+                                        <span class="en">
+                                            Motion artifacts may overlap with
+                                            the true heart-rate frequency,
+                                            making peak selection difficult.
+                                        </span>
+                                    </p>
+
+                                    <h3>
+                                        <span class="zh">二、处理流程</span>
+                                        <span class="en">2. Processing Pipeline</span>
+                                    </h3>
+
+                                    <ul>
+                                        <li>
+                                            <span class="zh">
+                                                对PPG信号进行去趋势、低通滤波和归一化；
+                                            </span>
+
+                                            <span class="en">
+                                                Detrend, filter and normalize the PPG.
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="zh">
+                                                采用8秒窗口、2秒步长进行分段处理；
+                                            </span>
+
+                                            <span class="en">
+                                                Use an 8-second window with a 2-second step.
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="zh">
+                                                提取频谱候选峰并结合历史心率进行跟踪；
+                                            </span>
+
+                                            <span class="en">
+                                                Track spectral candidates using previous estimates.
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="zh">
+                                                ACC主要用于极端运动状态下的异常拒绝和质量门控。
+                                            </span>
+
+                                            <span class="en">
+                                                Use ACC as a quality gate for severe motion.
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <h3>
+                                        <span class="zh">三、工程结论</span>
+                                        <span class="en">3. Engineering Conclusion</span>
+                                    </h3>
+
+                                    <p>
+                                        <span class="zh">
+                                            工程实践表明，复杂的ACC修正策略并不一定优于简单方法。
+                                            对资源有限的嵌入式设备而言，采用固定跟踪、变化限幅和
+                                            极端异常门控，通常具有更好的稳定性和部署价值。
+                                        </span>
+
+                                        <span class="en">
+                                            A simple tracking and gating strategy
+                                            can be more suitable for embedded deployment
+                                            than a complex correction model.
+                                        </span>
+                                    </p>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+                    </article>
+
+                    <!-- 康复机构文章 -->
+                    <article
+                        class="blog-post blog-filter-item"
+                        data-category="mechanical review"
+                    >
+
+                        <div class="post-cover">
+
+                            <img
+                                src="assets/images/projects/rehab-device.jpg"
+                                alt="运动康复器材机械结构设计"
+                                loading="lazy"
+                                decoding="async"
+                                onerror="
+                                    this.style.display='none';
+                                    this.nextElementSibling.style.display='grid';
+                                "
+                            >
+
+                            <div class="image-fallback">
+                                ⚙️
+                            </div>
+
+                            <span class="post-category">
+                                <span class="zh">机械设计</span>
+                                <span class="en">Mechanical Design</span>
+                            </span>
+
+                        </div>
+
+                        <div class="post-body">
+
+                            <div class="post-meta">
+
+                                <span>2026.06</span>
+
+                                <span>
+                                    <span class="zh">约 7 分钟</span>
+                                    <span class="en">7 min read</span>
+                                </span>
+
+                            </div>
+
+                            <h2>
+                                <span class="zh">
+                                    单电机驱动的空间运动康复机构设计
+                                </span>
+
+                                <span class="en">
+                                    Single-Motor Spatial Rehabilitation Mechanism
+                                </span>
+                            </h2>
+
+                            <p class="post-excerpt">
+
+                                <span class="zh">
+                                    本文介绍如何利用可调偏心套筒、圆柱凸轮和棘轮机构，
+                                    在单电机驱动条件下输出近似骨盆运动的空间轨迹，
+                                    并通过MATLAB进行轨迹参数优化。
+                                </span>
+
+                                <span class="en">
+                                    This article introduces a single-motor
+                                    rehabilitation mechanism using an eccentric
+                                    sleeve, cylindrical cam and ratchet.
+                                </span>
+
+                            </p>
+
+                            <div class="post-tags">
+
+                                <span class="post-tag tag-orange">
+                                    MATLAB
+                                </span>
+
+                                <span class="post-tag tag-blue">
+                                    SolidWorks
+                                </span>
+
+                                <span class="post-tag tag-green">
+                                    Mechanism
+                                </span>
+
+                            </div>
+
+                            <details class="post-details">
+
+                                <summary>
+                                    <span class="zh">阅读全文</span>
+                                    <span class="en">Read More</span>
+                                </summary>
+
+                                <div class="detail-content">
+
+                                    <h3>
+                                        <span class="zh">一、设计目标</span>
+                                        <span class="en">1. Design Objective</span>
+                                    </h3>
+
+                                    <p>
+                                        <span class="zh">
+                                            机构需要在较少驱动源的条件下产生上下、左右和前后方向
+                                            的耦合运动，使座椅输出类似马术治疗或步行骨盆运动的
+                                            空间轨迹，同时保证运动幅度可调。
+                                        </span>
+
+                                        <span class="en">
+                                            The mechanism aims to reproduce
+                                            coupled pelvic motion using a compact
+                                            single-motor structure.
+                                        </span>
+                                    </p>
+
+                                    <h3>
+                                        <span class="zh">二、结构方案</span>
+                                        <span class="en">2. Mechanical Structure</span>
+                                    </h3>
+
+                                    <ul>
+                                        <li>
+                                            <span class="zh">
+                                                可调偏心套筒控制水平运动幅度；
+                                            </span>
+
+                                            <span class="en">
+                                                Adjustable eccentric sleeve controls amplitude.
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="zh">
+                                                圆柱凸轮产生周期性的升降运动；
+                                            </span>
+
+                                            <span class="en">
+                                                Cylindrical cam generates vertical motion.
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="zh">
+                                                棘轮机构实现单向锁紧和反向调节；
+                                            </span>
+
+                                            <span class="en">
+                                                Ratchet mechanism enables locking and adjustment.
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="zh">
+                                                多个运动分量耦合形成空间“V8”形轨迹。
+                                            </span>
+
+                                            <span class="en">
+                                                Coupled motions form a spatial figure-eight path.
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <h3>
+                                        <span class="zh">三、验证方法</span>
+                                        <span class="en">3. Verification</span>
+                                    </h3>
+
+                                    <p>
+                                        <span class="zh">
+                                            使用MATLAB建立运动学模型并优化关键参数，
+                                            在SolidWorks中完成三维建模、装配和干涉检查，
+                                            最后通过座椅参考点的运动轨迹验证机构输出效果。
+                                        </span>
+
+                                        <span class="en">
+                                            MATLAB was used for kinematic
+                                            optimization, while SolidWorks was
+                                            used for assembly and interference checks.
+                                        </span>
+                                    </p>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+                    </article>
+
+                    <!-- PCB文章 -->
+                    <article
+                        class="blog-post blog-filter-item"
+                        data-category="embedded review"
+                    >
+
+                        <div class="post-cover">
+
+                            <img
+                                src="assets/images/projects/pcb-design.jpg"
+                                alt="传感器节点PCB设计与调试"
+                                loading="lazy"
+                                decoding="async"
+                                onerror="
+                                    this.style.display='none';
+                                    this.nextElementSibling.style.display='grid';
+                                "
+                            >
+
+                            <div class="image-fallback">
+                                🔧
+                            </div>
+
+                            <span class="post-category">
+                                <span class="zh">嵌入式系统</span>
+                                <span class="en">Embedded Systems</span>
+                            </span>
+
+                        </div>
+
+                        <div class="post-body">
+
+                            <div class="post-meta">
+
+                                <span>2026.05</span>
+
+                                <span>
+                                    <span class="zh">约 5 分钟</span>
+                                    <span class="en">5 min read</span>
+                                </span>
+
+                            </div>
+
+                            <h2>
+                                <span class="zh">
+                                    可穿戴传感器节点的PCB设计与调试流程
+                                </span>
+
+                                <span class="en">
+                                    PCB Design and Debugging for Wearable Sensor Nodes
+                                </span>
+                            </h2>
+
+                            <p class="post-excerpt">
+
+                                <span class="zh">
+                                    从面包板原型到PCB成品，硬件设计需要依次完成接口验证、
+                                    原理图设计、供电规划、布局布线、焊接检查和分模块调试。
+                                </span>
+
+                                <span class="en">
+                                    This article presents the complete workflow
+                                    from breadboard prototyping to PCB debugging.
+                                </span>
+
+                            </p>
+
+                            <div class="post-tags">
+
+                                <span class="post-tag tag-blue">
+                                    PCB
+                                </span>
+
+                                <span class="post-tag tag-green">
+                                    STM32
+                                </span>
+
+                                <span class="post-tag tag-purple">
+                                    ICM20948
+                                </span>
+
+                            </div>
+
+                            <details class="post-details">
+
+                                <summary>
+                                    <span class="zh">阅读全文</span>
+                                    <span class="en">Read More</span>
+                                </summary>
+
+                                <div class="detail-content">
+
+                                    <h3>
+                                        <span class="zh">一、先验证再制板</span>
+                                        <span class="en">1. Prototype Before PCB</span>
+                                    </h3>
+
+                                    <p>
+                                        <span class="zh">
+                                            在绘制PCB之前，先使用开发板和面包板验证传感器通信、
+                                            供电电压、程序接口和无线模块。这样能够提前排除器件选型
+                                            和通信协议层面的问题。
+                                        </span>
+
+                                        <span class="en">
+                                            Breadboard validation helps identify
+                                            communication and power issues before PCB fabrication.
+                                        </span>
+                                    </p>
+
+                                    <h3>
+                                        <span class="zh">二、PCB设计重点</span>
+                                        <span class="en">2. PCB Design Priorities</span>
+                                    </h3>
+
+                                    <ul>
+                                        <li>
+                                            <span class="zh">
+                                                电源入口设置保护、滤波和稳压电路；
+                                            </span>
+
+                                            <span class="en">
+                                                Add protection, filtering and regulation.
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="zh">
+                                                去耦电容靠近芯片电源引脚放置；
+                                            </span>
+
+                                            <span class="en">
+                                                Place decoupling capacitors near power pins.
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="zh">
+                                                保留SWD下载接口和关键测试点；
+                                            </span>
+
+                                            <span class="en">
+                                                Keep SWD and important test points.
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            <span class="zh">
+                                                数字通信线尽量缩短并保持连续参考地。
+                                            </span>
+
+                                            <span class="en">
+                                                Keep digital traces short with a continuous ground.
+                                            </span>
+                                        </li>
+                                    </ul>
+
+                                    <h3>
+                                        <span class="zh">三、推荐调试顺序</span>
+                                        <span class="en">3. Debugging Sequence</span>
+                                    </h3>
+
+                                    <p>
+                                        <span class="zh">
+                                            调试时先断电检查短路，再测量各级电源，随后下载最小程序，
+                                            最后依次测试传感器、显示模块和无线通信。分模块调试能够
+                                            避免多个问题同时出现时难以定位故障。
+                                        </span>
+
+                                        <span class="en">
+                                            Check shorts first, verify power rails,
+                                            run minimal firmware and then test each module.
+                                        </span>
+                                    </p>
+
+                                </div>
+
+                            </details>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+                <div
+                    class="empty-message"
+                    id="emptyMessage"
+                >
+                    <span class="zh">
+                        当前分类下暂无文章。
+                    </span>
+
+                    <span class="en">
+                        No articles are available in this category.
+                    </span>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <footer>
+
+        <div class="container">
+            © <span id="year"></span>
+            王焱杰 · Hosted on GitHub Pages
+        </div>
+
+    </footer>
+
+    <div
+        class="toast"
+        id="emailToast"
+        role="status"
+        aria-live="polite"
+    >
+        <span class="zh">
+            QQ邮箱已打开，邮箱地址已复制：1289423102@qq.com
+        </span>
+
+        <span class="en">
+            QQ Mail opened. Email copied: 1289423102@qq.com
+        </span>
+    </div>
+
+    <script>
+        (function () {
+            "use strict";
+
+            const EMAIL_ADDRESS =
+                "1289423102@qq.com";
+
+            const body =
+                document.body;
+
+            const languageToggle =
+                document.getElementById(
+                    "languageToggle"
+                );
+
+            const menuToggle =
+                document.getElementById(
+                    "menuToggle"
+                );
+
+            const mainNav =
+                document.getElementById(
+                    "mainNav"
+                );
+
+            const yearElement =
+                document.getElementById(
+                    "year"
+                );
+
+            const emailToast =
+                document.getElementById(
+                    "emailToast"
+                );
+
+            const filterButtons =
+                document.querySelectorAll(
+                    ".filter-button"
+                );
+
+            const filterItems =
+                document.querySelectorAll(
+                    ".blog-filter-item"
+                );
+
+            const emptyMessage =
+                document.getElementById(
+                    "emptyMessage"
+                );
+
+            let toastTimer = null;
+
+            /* 邮箱跳转与复制 */
+
+            document
+                .querySelectorAll(".qq-mail-link")
+                .forEach(function (link) {
+
+                    link.addEventListener(
+                        "click",
+                        copyEmailAddress
+                    );
+
+                });
+
+            function copyEmailAddress() {
+                if (
+                    navigator.clipboard &&
+                    window.isSecureContext
+                ) {
+                    navigator.clipboard
+                        .writeText(EMAIL_ADDRESS)
+                        .then(showEmailToast)
+                        .catch(fallbackCopyEmail);
+
+                    return;
+                }
+
+                fallbackCopyEmail();
+            }
+
+            function fallbackCopyEmail() {
+                const textarea =
+                    document.createElement(
+                        "textarea"
+                    );
+
+                textarea.value =
+                    EMAIL_ADDRESS;
+
+                textarea.setAttribute(
+                    "readonly",
+                    ""
+                );
+
+                textarea.style.position =
+                    "fixed";
+
+                textarea.style.left =
+                    "-9999px";
+
+                textarea.style.opacity =
+                    "0";
+
+                document.body.appendChild(
+                    textarea
+                );
+
+                textarea.focus();
+                textarea.select();
+
+                textarea.setSelectionRange(
+                    0,
+                    textarea.value.length
+                );
+
+                try {
+                    document.execCommand("copy");
+                    showEmailToast();
+                } catch (error) {
+                    console.warn(
+                        "邮箱地址复制失败：",
+                        error
+                    );
+                }
+
+                document.body.removeChild(
+                    textarea
+                );
+            }
+
+            function showEmailToast() {
+                if (!emailToast) {
+                    return;
+                }
+
+                emailToast.classList.add("show");
+
+                window.clearTimeout(toastTimer);
+
+                toastTimer =
+                    window.setTimeout(
+                        function () {
+                            emailToast.classList.remove(
+                                "show"
+                            );
+                        },
+                        3500
+                    );
+            }
+
+            /* 中英文切换 */
+
+            let savedLanguage = "zh";
+
+            try {
+                savedLanguage =
+                    localStorage.getItem(
+                        "homepage-language"
+                    ) || "zh";
+            } catch (error) {
+                savedLanguage = "zh";
+            }
+
+            if (
+                savedLanguage === "en" &&
+                languageToggle
+            ) {
+                body.classList.add("lang-en");
+
+                document.documentElement.lang =
+                    "en";
+
+                languageToggle.textContent =
+                    "中";
+            }
+
+            if (languageToggle) {
+                languageToggle.addEventListener(
+                    "click",
+                    function () {
+                        const isEnglish =
+                            body.classList.toggle(
+                                "lang-en"
+                            );
+
+                        document.documentElement.lang =
+                            isEnglish
+                                ? "en"
+                                : "zh-CN";
+
+                        languageToggle.textContent =
+                            isEnglish
+                                ? "中"
+                                : "EN";
+
+                        try {
+                            localStorage.setItem(
+                                "homepage-language",
+                                isEnglish
+                                    ? "en"
+                                    : "zh"
+                            );
+                        } catch (error) {
+                            console.warn(
+                                "语言设置保存失败：",
+                                error
+                            );
+                        }
+                    }
+                );
+            }
+
+            /* 手机端导航 */
+
+            if (
+                menuToggle &&
+                mainNav
+            ) {
+                menuToggle.addEventListener(
+                    "click",
+                    function () {
+                        const isOpen =
+                            mainNav.classList.toggle(
+                                "open"
+                            );
+
+                        menuToggle.setAttribute(
+                            "aria-expanded",
+                            String(isOpen)
+                        );
+
+                        menuToggle.textContent =
+                            isOpen
+                                ? "×"
+                                : "☰";
+                    }
+                );
+
+                document
+                    .querySelectorAll(".nav-link")
+                    .forEach(function (link) {
+
+                        link.addEventListener(
+                            "click",
+                            closeMobileMenu
+                        );
+
+                    });
+
+                document.addEventListener(
+                    "click",
+                    function (event) {
+                        const clickedNav =
+                            mainNav.contains(
+                                event.target
+                            );
+
+                        const clickedMenu =
+                            menuToggle.contains(
+                                event.target
+                            );
+
+                        if (
+                            !clickedNav &&
+                            !clickedMenu &&
+                            mainNav.classList.contains(
+                                "open"
+                            )
+                        ) {
+                            closeMobileMenu();
+                        }
+                    }
+                );
+            }
+
+            function closeMobileMenu() {
+                if (
+                    !mainNav ||
+                    !menuToggle
+                ) {
+                    return;
+                }
+
+                mainNav.classList.remove("open");
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuToggle.textContent =
+                    "☰";
+            }
+
+            /* 文章分类筛选 */
+
+            filterButtons.forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const selectedFilter =
+                                button.dataset.filter;
+
+                            filterButtons.forEach(
+                                function (item) {
+                                    item.classList.remove(
+                                        "active"
+                                    );
+                                }
+                            );
+
+                            button.classList.add(
+                                "active"
+                            );
+
+                            let visibleCount = 0;
+
+                            filterItems.forEach(
+                                function (item) {
+
+                                    const categories =
+                                        item.dataset.category
+                                            .split(" ");
+
+                                    const shouldShow =
+                                        selectedFilter === "all" ||
+                                        categories.includes(
+                                            selectedFilter
+                                        );
+
+                                    item.classList.toggle(
+                                        "hidden",
+                                        !shouldShow
+                                    );
+
+                                    if (shouldShow) {
+                                        visibleCount += 1;
+                                    }
+                                }
+                            );
+
+                            if (emptyMessage) {
+                                emptyMessage.classList.toggle(
+                                    "show",
+                                    visibleCount === 0
+                                );
+                            }
+                        }
+                    );
+                }
+            );
+
+            /* 自动更新年份 */
+
+            if (yearElement) {
+                yearElement.textContent =
+                    new Date().getFullYear();
+            }
+        })();
+    </script>
+
+</body>
+</html>
